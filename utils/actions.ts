@@ -34,7 +34,6 @@ export async function createJobAction(
         clerkId: userId,
       },
     });
-    console.log("Job created successfully:", job);
     return job;
   } catch (error) {
     console.error("Error creating job:", error);
@@ -60,7 +59,7 @@ export async function getAllJobsAction({
   page: number;
   totalPages: number;
 }> {
-  const userId = authenticateAndRedirect();
+  const userId = await authenticateAndRedirect();
   try {
     let whereClause: Prisma.JobWhereInput = {
       clerkId: userId,
@@ -224,7 +223,6 @@ export async function getChartsDataAction(): Promise<
         createdAt: "asc",
       },
     });
-    console.log("jobs", jobs);
     const applicationsPerMonth = jobs.reduce((acc, job) => {
       const date = dayjs(job.createdAt).format("MMM YY");
 

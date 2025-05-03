@@ -3,7 +3,6 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 const isProtectedRoute = createRouteMatcher(["/add-job"]);
 
 export default clerkMiddleware(async (auth, req) => {
-  console.log(isProtectedRoute(req));
   if (isProtectedRoute(req)) await auth.protect();
 });
 
