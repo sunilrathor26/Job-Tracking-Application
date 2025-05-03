@@ -13,7 +13,7 @@ type PageProps = {
   };
 };
 
-async function JobDetailPage({ params }: PageProps) {
+async function JobDetailPage({ params }: Awaited<PageProps>) {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
