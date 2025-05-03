@@ -61,9 +61,9 @@ export async function getAllJobsAction({
 }> {
   const userId = await authenticateAndRedirect();
   try {
-    let whereClause = {
+    let whereClause: Prisma.JobWhereInput = {
       clerkId: userId,
-    } as Prisma.JobWhereInput;
+    };
     if (search) {
       whereClause = {
         ...whereClause,
