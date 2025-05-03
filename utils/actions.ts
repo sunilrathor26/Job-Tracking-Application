@@ -131,7 +131,7 @@ export async function deleteJobAction(id: string) {
 
 export async function getSingleJobAction(id: string): Promise<JobType | null> {
   let job: JobType | null = null;
-  const userId = authenticateAndRedirect();
+  const userId = await authenticateAndRedirect();
 
   try {
     job = await prisma.job.findUnique({
@@ -153,7 +153,7 @@ export async function updateJobAction(
   id: string,
   values: CreateAndEditJobType
 ): Promise<JobType | null> {
-  const userId = authenticateAndRedirect();
+  const userId = await authenticateAndRedirect();
 
   try {
     const job: JobType = await prisma.job.update({
@@ -176,7 +176,7 @@ export async function getStatsAction(): Promise<{
   interview: number;
   declined: number;
 }> {
-  const userId = authenticateAndRedirect();
+  const userId = await authenticateAndRedirect();
   // just to show Skeleton
   // await new Promise((resolve) => setTimeout(resolve, 5000));
   try {
@@ -209,7 +209,7 @@ export async function getStatsAction(): Promise<{
 export async function getChartsDataAction(): Promise<
   Array<{ date: string; count: number }>
 > {
-  const userId = authenticateAndRedirect();
+  const userId = await authenticateAndRedirect();
   const sixMonthsAgo = dayjs().subtract(1, "year").toDate();
   try {
     const jobs = await prisma.job.findMany({
