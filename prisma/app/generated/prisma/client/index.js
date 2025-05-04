@@ -141,6 +141,10 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -167,8 +171,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"app/generated/prisma/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Job {\n  id        String   @id @default(uuid())\n  clerkId   String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  position  String\n  company   String\n  location  String\n  status    String\n  mode      String\n}\n",
-  "inlineSchemaHash": "c40f24096c8d181ffe2b282d03316339f050610d9d45c2ffdea6a6db40e148e0",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"app/generated/prisma/client\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Job {\n  id        String   @id @default(uuid())\n  clerkId   String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  position  String\n  company   String\n  location  String\n  status    String\n  mode      String\n}\n",
+  "inlineSchemaHash": "4f194ee6cea5103e274994e518794b70a43748cd8c82119a8970c5f53120fc68",
   "copyEngine": true
 }
 
@@ -209,6 +213,10 @@ Object.assign(exports, Prisma)
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node");
 path.join(process.cwd(), "prisma/app/generated/prisma/client/query_engine-windows.dll.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-rhel-openssl-3.0.x.so.node");
+path.join(process.cwd(), "prisma/app/generated/prisma/client/libquery_engine-rhel-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "prisma/app/generated/prisma/client/schema.prisma")
