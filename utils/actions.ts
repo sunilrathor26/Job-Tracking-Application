@@ -239,7 +239,7 @@ export async function getStatsAction(): Promise<{
         clerkId: userId, // replace userId with the actual clerkId
       },
     });
-    const statsObject = stats.reduce((acc, curr) => {
+    const statsObject = stats.reduce((acc: Record<string, number>, curr) => {
       acc[curr.status] = curr._count.status;
       return acc;
     }, {} as Record<string, number>);
@@ -273,7 +273,10 @@ export async function getChartsDataAction(): Promise<
         createdAt: "asc",
       },
     });
-    const applicationsPerMonth = jobs.reduce((acc, job) => {
+    const applicationsPerMonth = jobs.reduce((acc: {
+      date: string;
+      count: number;
+  }[], job) => {
       const date = dayjs(job.createdAt).format("MMM YY");
 
       const existingEntry = acc.find((entry) => entry.date === date);
