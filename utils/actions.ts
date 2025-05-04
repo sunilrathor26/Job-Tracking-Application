@@ -50,71 +50,7 @@ type GetAllJobsActionTypes = {
   limit?: number;
 };
 
-// export async function getAllJobsAction({
-//   search,
-//   jobStatus,
-//   page = 1,
-//   limit = 10,
-// }: GetAllJobsActionTypes): Promise<{
-//   jobs: JobType[];
-//   count: number;
-//   page: number;
-//   totalPages: number;
-// }> {
-//   const userId = await authenticateAndRedirect();
-//   try {
-//     let whereClause: Prisma.JobWhereInput = {
-//       clerkId: userId,
-//     };
-//     if (search) {
-//       whereClause = {
-//         ...whereClause,
-//         OR: [
-//           {
-//             position: {
-//               contains: search,
-//             },
-//           },
-//           {
-//             company: {
-//               contains: search,
-//             },
-//           },
-//           {
-//             location: {
-//               contains: search,
-//             },
-//           },
-//         ],
-//       };
-//     }
-//     if (jobStatus && jobStatus !== "all") {
-//       whereClause = {
-//         ...whereClause,
-//         status: jobStatus,
-//       };
-//     }
 
-//     const skip = (page - 1) * limit;
-
-//     const jobs: JobType[] = await prisma.job.findMany({
-//       where: whereClause,
-//       skip,
-//       take: limit,
-//       orderBy: {
-//         createdAt: "desc",
-//       },
-//     });
-//     const count: number = await prisma.job.count({
-//       where: whereClause,
-//     });
-//     const totalPages = Math.ceil(count / limit);
-//     return { jobs, count, page, totalPages };
-//   } catch (error) {
-//     console.error("Error fetching jobs:", error);
-//     return { jobs: [], count: 0, page: 1, totalPages: 0 };
-//   }
-// }
 
 export async function getAllJobsAction({
   search,
