@@ -167,8 +167,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"app/generated/prisma/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Job {\n  id        String   @id @default(uuid())\n  clerkId   String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  position  String\n  company   String\n  location  String\n  status    String\n  mode      String\n}\n",
-  "inlineSchemaHash": "5f2823ffcd2efebe9b6f9ca3f5ab01c2a66961874628d3e12258de272ac1e211",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"app/generated/prisma/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Job {\n  id        String   @id @default(uuid())\n  clerkId   String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  position  String\n  company   String\n  location  String\n  status    String\n  mode      String\n}\n",
+  "inlineSchemaHash": "c40f24096c8d181ffe2b282d03316339f050610d9d45c2ffdea6a6db40e148e0",
   "copyEngine": true
 }
 

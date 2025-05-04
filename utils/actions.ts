@@ -8,8 +8,10 @@ import {
   JobStatus,
 } from "./types";
 import { redirect } from "next/navigation";
-import { PrismaClient } from "@prisma/client";
-import { Prisma } from "@prisma/client";
+//import { PrismaClient } from "@prisma/client";
+//import { Prisma } from "@prisma/client";
+import { Prisma } from "@/prisma/app/generated/prisma/client";
+import { PrismaClient } from "@/prisma/app/generated/prisma/client";
 import dayjs from "dayjs";
 
 const prisma = new PrismaClient();
@@ -239,10 +241,16 @@ export async function getStatsAction(): Promise<{
         clerkId: userId, // replace userId with the actual clerkId
       },
     });
-    const statsObject = stats.reduce((acc: Record<string, number>, curr: { status: string; _count: { status: number } }) => {
-      acc[curr.status] = curr._count.status;
-      return acc;
-    }, {} as Record<string, number>);
+    const statsObject = stats.reduce(
+      (
+        acc: Record<string, number>,
+        curr: { status: string; _count: { status: number } }
+      ) => {
+        acc[curr.status] = curr._count.status;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
 
     const defaultStats = {
       pending: 0,
@@ -273,22 +281,28 @@ export async function getChartsDataAction(): Promise<
         createdAt: "asc",
       },
     });
-    const applicationsPerMonth = jobs.reduce((acc: {
-      date: string;
-      count: number;
-  }[], job:JobType) => {
-      const date = dayjs(job.createdAt).format("MMM YY");
+    const applicationsPerMonth = jobs.reduce(
+      (
+        acc: {
+          date: string;
+          count: number;
+        }[],
+        job: JobType
+      ) => {
+        const date = dayjs(job.createdAt).format("MMM YY");
 
-      const existingEntry = acc.find((entry) => entry.date === date);
+        const existingEntry = acc.find((entry) => entry.date === date);
 
-      if (existingEntry) {
-        existingEntry.count += 1;
-      } else {
-        acc.push({ date, count: 1 });
-      }
+        if (existingEntry) {
+          existingEntry.count += 1;
+        } else {
+          acc.push({ date, count: 1 });
+        }
 
-      return acc;
-    }, [] as Array<{ date: string; count: number }>);
+        return acc;
+      },
+      [] as Array<{ date: string; count: number }>
+    );
 
     return applicationsPerMonth;
   } catch (error) {
