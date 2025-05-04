@@ -239,7 +239,7 @@ export async function getStatsAction(): Promise<{
         clerkId: userId, // replace userId with the actual clerkId
       },
     });
-    const statsObject = stats.reduce((acc: Record<string, number>, curr) => {
+    const statsObject = stats.reduce((acc: Record<string, number>, curr: { status: string; _count: { status: number } }) => {
       acc[curr.status] = curr._count.status;
       return acc;
     }, {} as Record<string, number>);
