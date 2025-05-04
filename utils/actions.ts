@@ -8,13 +8,13 @@ import {
   JobStatus,
 } from "./types";
 import { redirect } from "next/navigation";
-//import { PrismaClient } from "@prisma/client";
-//import { Prisma } from "@prisma/client";
 import { Prisma } from "@/prisma/app/generated/prisma/client";
 import { PrismaClient } from "@/prisma/app/generated/prisma/client";
 import dayjs from "dayjs";
 
 const prisma = new PrismaClient();
+
+console.log("🧪 Prisma Client Info", PrismaClient);
 
 async function authenticateAndRedirect(): Promise<string> {
   const { userId } = await auth();
@@ -49,8 +49,6 @@ type GetAllJobsActionTypes = {
   page?: number;
   limit?: number;
 };
-
-
 
 export async function getAllJobsAction({
   search,
