@@ -14,7 +14,6 @@ import dayjs from "dayjs";
 
 const prisma = new PrismaClient();
 
-console.log("🧪 Prisma Client Info", PrismaClient);
 
 async function authenticateAndRedirect(): Promise<string> {
   const { userId } = await auth();
